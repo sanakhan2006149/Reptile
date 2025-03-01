@@ -5,6 +5,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
 import joblib
+import os
 from sklearn.linear_model import BayesianRidge
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.preprocessing import MinMaxScaler
@@ -54,17 +55,19 @@ print("Current Model EV:", evCurrent)
 print("Current Model R^2:", currentModelScore)
 
 # Plotting data
-plt.figure(figsize=(8, 8))
-sns.set(style="whitegrid")
-sns.scatterplot(x=yTest, y=yPredict, color="blue", s=50, edgecolor='black', alpha=0.75)
-min_val = min(min(yTest), min(yPredict))
-max_val = max(max(yTest), max(yPredict))
-plt.plot([min_val, max_val], [min_val, max_val], 'r--', lw=2, label="Perfect Fit (y = x)")
-plt.title("BRR Model - " + ("Film-Thickness" if yIndex == -2 else "N/Ti Ratio"), fontsize=16)
-plt.xlabel("Measurements", fontsize=14)
-plt.ylabel("BRR Predictions", fontsize=14)
-plt.legend()
-plt.show()
+# plt.figure(figsize=(8, 8))
+# sns.set(style="whitegrid")
+# sns.scatterplot(x=yTest, y=yPredict, color="blue", s=50, edgecolor='black', alpha=0.75)
+# min_val = min(min(yTest), min(yPredict))
+# max_val = max(max(yTest), max(yPredict))
+# plt.plot([min_val, max_val], [min_val, max_val], 'r--', lw=2, label="Perfect Fit (y = x)")
+# plt.title("BRR Model - " + ("Film-Thickness" if yIndex == -2 else "N/Ti Ratio"), fontsize=16)
+# plt.xlabel("Measurements", fontsize=14)
+# plt.ylabel("BRR Predictions", fontsize=14)
+# plt.legend()
+# plt.show()
 
 # Saving trained model
-# joblib.dump(brr, "brr_model.pkl")
+os.makedirs("Saved Models", exist_ok=True)
+joblib.dump(brr, "Saved Models/Starter Models/brr_model.pkl")
+print("Saved!")
