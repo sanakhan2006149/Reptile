@@ -6,27 +6,29 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import joblib
 import os
+import config
 from sklearn.linear_model import BayesianRidge
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error, mean_absolute_error,  explained_variance_score
 
+# Select size, dataset, output, and randomState from config
+setSize = config.size
+data = config.data
+yIndex = config.yIndex
+randomState = config.randomState
+model = config.model
 
-# Selecting dataset
-data = "Datasets/NitrideMetal (Dataset 2) NTi.csv"
+# Automating file creation
+datasetModels  = "Dataset 1 Models" if "Dataset 1" in data else "Dataset 2 Models"
+output = "Film Thickness" if yIndex == -2 else "NTi"
+
+# 80% data to train, 20% leave for testing. random_state is 40
 df = pd.read_csv(data)
-
 x = df.iloc[:, :-2].values
-# Selecting output
-# A y-index of -2 = film-thickness, -1 = N/Ti ratio
-yIndex = -2
 y = df.iloc[:, yIndex].values
-
-# 80% data to train, 20% leave for testing. random_state is 40 temporarily,
-# Will look for the study's random_state later
-setSize = 40
 trainSize = min(setSize, int(0.8 * len(x)), len(x))
-xTrain, xTest, yTrain, yTest = train_test_split(x, y, train_size=trainSize, random_state=40)
+xTrain, xTest, yTrain, yTest = train_test_split(x, y, train_size=trainSize, random_state=randomState)
 
 # Scaling data
 xTrainLog = np.log1p(xTrain)
@@ -68,6 +70,8 @@ print("Current Model R^2:", currentModelScore)
 # plt.show()
 
 # Saving trained model
-os.makedirs("Saved Models", exist_ok=True)
-joblib.dump(brr, "Saved Models/Starter Models/brr_model.pkl")
+directory = f"Saved Models/Starter Models/{datasetModels}/{output}/{model}/"
+modelName = f"{model.lower()}_model_{setSize}.pkl"
+os.makedirs(directory, exist_ok=True)
+joblib.dump(brr, os.path.join(directory, modelName))
 print("Saved!")

@@ -13,7 +13,7 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error,  explained_
 
 
 # Selecting dataset
-data = "Datasets/NitrideMetal (Dataset 2) NTi.csv"
+data = "Datasets/NitrideMetal (Dataset 2 Models) NTi.csv"
 df = pd.read_csv(data)
 
 x = df.iloc[:, :-2].values
