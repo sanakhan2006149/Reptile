@@ -11,7 +11,7 @@ from sklearn.linear_model import BayesianRidge
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error, explained_variance_score
-
+#something ssrnejn
 # Select size, dataset, output, and randomState from config
 setSize = config.size
 data = config.data
@@ -91,5 +91,3 @@ with open(f"Saved Models/{datasetModels}/{output}/{model}/{model} Metric Iterati
 # plt.ylabel("BRR Predictions", fontsize=14)
 # plt.legend()
 # plt.show()
-
-
