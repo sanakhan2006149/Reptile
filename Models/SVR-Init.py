@@ -1,4 +1,4 @@
-# Replica of BRR model from Reactive Sputtering study
+# SVR model from Reactive Sputtering study
 
 import numpy as np
 import seaborn as sns
@@ -17,7 +17,7 @@ setSize = config.size
 data = config.data
 yIndex = config.yIndex
 randomState = config.randomState
-model = config.model
+model = "SVR"
 
 # Automating file creation
 datasetModels  = "Dataset 1 Models" if "Dataset 1" in data else "Dataset 2 Models"
@@ -30,6 +30,7 @@ with open(f"Saved Models/{datasetModels}/{output}/{model}/{model} Metric Iterati
     f.write("MSE, RMSE, MAPE, EV, and R^2 Metrics\n")
     f.write(f"Current Model Dataset: {data}\n")
     f.write(f"Output Variable: {output}\n")
+    f.write(f"Random State: {randomState}\n")
     f.write("=" * 50 + "\n")
     while setSize != 0:
         df = pd.read_csv(data)
@@ -71,11 +72,11 @@ with open(f"Saved Models/{datasetModels}/{output}/{model}/{model} Metric Iterati
         print(f"Completed {setSize}!")
 
         # Saving trained model
-        directory = f"Saved Models/Starter Models/{datasetModels}/{output}/{model}/"
-        modelName = f"{model.lower()}_model_{setSize}.pkl"
-        os.makedirs(directory, exist_ok=True)
-        joblib.dump(svr, os.path.join(directory, modelName))
-        print("Saved!")
+        # directory = f"Saved Models/Starter Models/{datasetModels}/{output}/{model}/"
+        # modelName = f"{model.lower()}_model_{setSize}.pkl"
+        # os.makedirs(directory, exist_ok=True)
+        # joblib.dump(svr, os.path.join(directory, modelName))
+        # print("Saved!")
         setSize -= 5
 
 

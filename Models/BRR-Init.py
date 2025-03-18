@@ -17,7 +17,7 @@ setSize = config.size
 data = config.data
 yIndex = config.yIndex
 randomState = config.randomState
-model = config.model
+model = "BRR"
 
 # Automating file creation
 datasetModels  = "Dataset 1 Models" if "Dataset 1" in data else "Dataset 2 Models"

@@ -13,9 +13,9 @@ from sklearn.metrics import mean_squared_error, explained_variance_score
 # Select size, dataset, output, and randomState from config
 setSize = config.size # Sample size for training
 data = config.data # Dataset chosen
-yIndex = config.yIndex #
+yIndex = config.yIndex
 randomState = config.randomState
-model = config.model
+model = "BRR"
 
 # Automating file creation
 datasetModels  = "Dataset 1 Models" if "Dataset 1" in data else "Dataset 2 Models"

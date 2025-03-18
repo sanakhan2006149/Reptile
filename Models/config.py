@@ -8,7 +8,7 @@ yIndex = -2
 
 # ---------------------------------------
 model = "BRR"
-randomState = 40
+randomState = 42
 # ---------------------------------------
 displayRandomState = 40
 displayModelNum = 20
