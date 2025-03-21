@@ -1,5 +1,3 @@
-# Replica of BRR model from Reactive Sputtering study
-
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -11,10 +9,10 @@ from sklearn.linear_model import BayesianRidge
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error, explained_variance_score
-#something ssrnejn
+
 # Select size, dataset, output, and randomState from config
-setSize = config.size
-data = config.data
+setSize = config.size # Sample size for training
+data = config.data # Dataset chosen
 yIndex = config.yIndex
 randomState = config.randomState
 model = "BRR"
@@ -78,17 +76,3 @@ with open(f"Saved Models/{datasetModels}/{output}/{model}/{model} Metric Iterati
         joblib.dump(brr, os.path.join(directory, modelName))
         print("Saved!")
         setSize -= 5
-
-
-# Plotting data
-# plt.figure(figsize=(8, 8))
-# sns.set(style="whitegrid")
-# sns.scatterplot(x=yTest, y=yPredict, color="blue", s=50, edgecolor='black', alpha=0.75)
-# min_val = min(min(yTest), min(yPredict))
-# max_val = max(max(yTest), max(yPredict))
-# plt.plot([min_val, max_val], [min_val, max_val], 'r--', lw=2, label="Perfect Fit (y = x)")
-# plt.title("BRR Model - " + ("Film-Thickness" if yIndex == -2 else "N/Ti Ratio"), fontsize=16)
-# plt.xlabel("Measurements", fontsize=14)
-# plt.ylabel("BRR Predictions", fontsize=14)
-# plt.legend()
-# plt.show()

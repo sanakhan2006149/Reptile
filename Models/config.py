@@ -7,8 +7,8 @@ yIndex = -2
 # -1 = N/Ti ratio
 
 # ---------------------------------------
-model = "SVR"
-randomState = 40
+model = "BRR"
+randomState = 42
 # ---------------------------------------
 displayRandomState = 40
 displayModelNum = 20

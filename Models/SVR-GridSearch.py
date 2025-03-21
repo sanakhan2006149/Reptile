@@ -18,7 +18,6 @@ setSize = config.size
 data = config.data
 yIndex = config.yIndex
 randomState = config.randomState
-model = config.model
 
 # Selecting dataset columns
 df = pd.read_csv(data)
@@ -65,6 +64,7 @@ evCurrent = explained_variance_score(yTest, yPredict)
 currentModelScore = svr.score(xTestScaled, yTest)
 print("Current Model Dataset:", data)
 print("Current Model Training Size:",setSize)
+print("Random State:",randomState)
 print("Current Model MSE:", mseCurrent)
 print("Current Model RMSE:", rmseCurrent)
 print("Current Model MAPE:", mapeCurrent)

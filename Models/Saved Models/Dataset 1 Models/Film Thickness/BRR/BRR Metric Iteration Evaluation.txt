@@ -1,6 +1,7 @@
 MSE, RMSE, MAPE, EV, and R^2 Metrics
 Current Model Dataset: Datasets/Nitride (Dataset 1) NTi.csv
 Output Variable: Film Thickness
+Random State: 40
 ==================================================
 Current Model Training Size: 40
 MSE: 60509.11783452109
