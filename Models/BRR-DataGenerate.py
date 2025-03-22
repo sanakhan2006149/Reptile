@@ -1,11 +1,10 @@
-# Generating augmented data with SVR regression model
-# NOTE: MUST ADJUST SVG HYPERPARAMETERS FOR BEST PERFORMANCE
+# Generating augmented data with BRR regression model
 
 import numpy as np
 import pandas as pd
 import os
 import config
-from sklearn.svm import SVR
+from sklearn.linear_model import BayesianRidge
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 
@@ -14,7 +13,7 @@ setSize = config.size
 data = config.data
 yIndex = config.yIndex
 randomState = config.randomState
-model = "SVR"
+model = "BRR"
 
 # Automating file creation
 datasetModels  = "Dataset 1 Models" if "Dataset 1" in data else "Dataset 2 Models"
@@ -38,10 +37,9 @@ dataScaler = MinMaxScaler(feature_range=(-1, 1))
 xTrainScaled = dataScaler.fit_transform(xTrainLog)
 xTestScaled = dataScaler.transform(xTestLog)
 
-# Init SVR model
-svr = SVR(kernel='rbf', C=5000.0, epsilon=9e-05, gamma='scale') # ADJUST HYPERPARAMETERS
-svr.fit(xTrainScaled, yTrain)
-
+# Init BRR model
+brr = BayesianRidge()
+brr.fit(xTrainScaled, yTrain)
 
 # Interpolation and Extrapolation, at same time
 xMin = x.min(axis=0)
@@ -53,7 +51,7 @@ totalAugmentedX = 822
 xAugmented = np.random.uniform(xMin, xMax, size=(totalAugmentedX, x.shape[1]))
 xAugmentedLog = np.log1p(xAugmented)
 xAugmentedScaled = dataScaler.transform(xAugmentedLog)
-yAugmented = svr.predict(xAugmentedScaled)
+yAugmented = brr.predict(xAugmentedScaled)
 xColumns = np.array(xAugmented)
 yColumn = np.array(yAugmented)
 

@@ -17,9 +17,8 @@ class Reptile(nn.Module):
         with open(SVRdataFile, "r") as f:
             data = f.readline()
             df = pd.read_csv(data)
-            x = df.iloc[:, :-2].values
-            # Selecting output
-            # y = df.iloc[:, yIndex].values
+            x = df.iloc[:, :-1].values
+            y = df.iloc[:, -1].values
 
 
 
