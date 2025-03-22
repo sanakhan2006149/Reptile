@@ -1,6 +1,6 @@
+# Writing metrics for BRR regression model for sizes 5-40.
+
 import numpy as np
-import seaborn as sns
-import matplotlib.pyplot as plt
 import pandas as pd
 import joblib
 import os
@@ -10,9 +10,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error, explained_variance_score
 
-# Select size, dataset, output, and randomState from config
-setSize = config.size # Sample size for training
-data = config.data # Dataset chosen
+# Select dataset, output, and randomState from config
+setSize = 40
+data = config.data
 yIndex = config.yIndex
 randomState = config.randomState
 model = "BRR"
@@ -23,7 +23,7 @@ output = "Film Thickness" if yIndex == -2 else "NTi"
 
 directory = f"Saved Models/{datasetModels}/{output}/{model}"
 os.makedirs(directory, exist_ok=True)
-with open(f"Saved Models/{datasetModels}/{output}/{model}/{model} Metric Iteration Evaluation.txt", "w") as f:
+with open(f"Saved Models/{datasetModels}/{output}/{model}/{model} Random_{randomState} Metric Iteration Evaluation.txt", "w") as f:
     # Write headers
     f.write("MSE, RMSE, MAPE, EV, and R^2 Metrics\n")
     f.write(f"Current Model Dataset: {data}\n")
@@ -70,9 +70,12 @@ with open(f"Saved Models/{datasetModels}/{output}/{model}/{model} Metric Iterati
         print(f"Completed {setSize}!")
 
         # Saving trained model
-        directory = f"Saved Models/Starter Models/{datasetModels}/{output}/{model}/"
-        modelName = f"{model.lower()}_model_{setSize}.pkl"
-        os.makedirs(directory, exist_ok=True)
-        joblib.dump(brr, os.path.join(directory, modelName))
-        print("Saved!")
+        # directory = f"Saved Models/Starter Models/{datasetModels}/{output}/{model}/"
+        # modelName = f"{model.lower()}_model_{setSize}.pkl"
+        # os.makedirs(directory, exist_ok=True)
+        # joblib.dump(brr, os.path.join(directory, modelName))
+        # print("Saved!")
+
         setSize -= 5
+
+

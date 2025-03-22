@@ -1,4 +1,4 @@
-# Replica of SVR model from Reactive Sputtering study
+# GridSearch and graph for best hyperparameters of SVG regression model for different randomStates
 
 import numpy as np
 import seaborn as sns
@@ -29,17 +29,12 @@ y = df.iloc[:, yIndex].values
 trainSize = min(setSize, int(0.8 * len(x)), len(x))
 xTrain, xTest, yTrain, yTest = train_test_split(x, y, train_size=trainSize, random_state=randomState)
 
-
 # Scaling data
 xTrainLog = np.log1p(xTrain)
 xTestLog = np.log1p(xTest)
 dataScaler = MinMaxScaler(feature_range=(-1, 1))
 xTrainScaled = dataScaler.fit_transform(xTrainLog)
 xTestScaled = dataScaler.transform(xTestLog)
-
-# Training SVR model, determining epsilon tube,
-svr = SVR(kernel='rbf', C = 1000,  epsilon= 0.01, gamma='scale')
-svr.fit(xTrainScaled, yTrain)
 
 # GridSearchCV finding optimal hyperparameters, with cross-validation
 paramGrid = {
@@ -48,20 +43,22 @@ paramGrid = {
     'gamma': ['scale', 'auto',  0.01, 0.1, 1, 10, 100,],
     'epsilon': [0.00009, 0.0001, 0.001, 0.01, 0.05, 0.1, 0.2, 0.5]
 }
-gridSearch = GridSearchCV(svr, paramGrid, cv=5, scoring='r2', n_jobs=-1)
+gridSearch = GridSearchCV(SVR(), paramGrid, cv=5, scoring='r2', n_jobs=-1)
 gridSearch.fit(xTrainScaled, yTrain)
 print("Best SVR Parameters:", gridSearch.best_params_)
 bestSvr = gridSearch.best_estimator_
+trainScore = bestSvr.score(xTrainScaled, yTrain)
+print("Train Set Score (R^2):", trainScore)
 testScore = bestSvr.score(xTestScaled, yTest)
 print("Test Set Score (R^2):", testScore)
 
 # SVR model making predictions
-yPredict = svr.predict(xTestScaled)
+yPredict = bestSvr.predict(xTestScaled)
 mseCurrent = mean_squared_error(yTest, yPredict)
 rmseCurrent = np.sqrt(mseCurrent)
 mapeCurrent = np.mean(np.abs((yTest - yPredict) / yTest))
 evCurrent = explained_variance_score(yTest, yPredict)
-currentModelScore = svr.score(xTestScaled, yTest)
+currentModelScore = bestSvr.score(xTestScaled, yTest)
 print("Current Model Dataset:", data)
 print("Current Model Training Size:",setSize)
 print("Random State:",randomState)
@@ -70,7 +67,6 @@ print("Current Model RMSE:", rmseCurrent)
 print("Current Model MAPE:", mapeCurrent)
 print("Current Model EV:", evCurrent)
 print("Current Model R^2:", currentModelScore)
-
 
 # Plotting data
 plt.figure(figsize=(8, 8))
@@ -84,8 +80,3 @@ plt.xlabel("Measurements", fontsize=14)
 plt.ylabel("SVR Predictions", fontsize=14)
 plt.legend()
 plt.show()
-
-# Saving trained model
-# os.makedirs("Saved Models", exist_ok=True)
-# joblib.dump(svr, "Saved Models/Starter Models/svr_model.pkl")
-# print("Saved!")
