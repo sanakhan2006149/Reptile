@@ -1,17 +1,25 @@
 # ========================================
+
 # Select size, dataset, output, model and randomState
 size = 40
 data = "Datasets/Nitride (Dataset 1) NTi.csv"
+randomState = 44
 yIndex = -2
+
 # (-2) = film-thickness
 # (-1) = N/Ti ratio
 
-# ---------------------------------------
-randomState = 44
-# ---------------------------------------
-displayRandomState = 40
-displayModelNum = 20
-displayModel = "SVR"
+# ========================================
+
+# Neural Network Configuration
+nSize = 40
+nData = "Datasets/Nitride (Dataset 1) NTi.csv"
+nRandomState = 44
+nYIndex = -2
+
+# (-2) = film-thickness
+# (-1) = N/Ti ratio
+
 # ========================================
 
 
