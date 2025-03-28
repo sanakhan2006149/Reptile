@@ -1,10 +1,10 @@
 # ========================================
 
-# Select size, dataset, output, model and randomState
-size = 40
-data = "Datasets/Nitride (Dataset 1) NTi.csv"
-randomState = 44
-yIndex = -2
+# WriteMetrics, DataGenerate, and GridSearch Configuration
+size: int = 40
+data: str = "Datasets/Nitride (Dataset 1) NTi.csv"
+randomState: int = 47
+yIndex: int = -2
 
 # (-2) = film-thickness
 # (-1) = N/Ti ratio
@@ -12,13 +12,18 @@ yIndex = -2
 # ========================================
 
 # Neural Network Configuration
-nSize = 40
-nData = "Datasets/Nitride (Dataset 1) NTi.csv"
-nRandomState = 44
-nYIndex = -2
+nSize: int = 40
+nData: str = "Datasets/Nitride (Dataset 1) NTi.csv"
+nRandomState: int = 47
+nYIndex: int = -2
+epochs: int = 16
+batchSize: int = 20
+learningRate: float = 0.001
 
 # (-2) = film-thickness
 # (-1) = N/Ti ratio
+# Pretraining Batch Size = {16, 512, 1028}
+# Pretraining Epoch = {20, 200, 1000}
 
 # ========================================
 

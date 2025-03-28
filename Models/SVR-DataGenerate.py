@@ -20,7 +20,7 @@ model = "SVR"
 datasetModels  = "Dataset 1 Models" if "Dataset 1" in data else "Dataset 2 Models"
 output = "Film Thickness" if yIndex == -2 else "NTi"
 
-directory = f"Saved Models/{datasetModels}/{output}/{model}"
+directory = f"Regression Model Data and Metrics/{datasetModels}/{output}/{model}"
 os.makedirs(directory, exist_ok=True)
 df = pd.read_csv(data)
 x = df.iloc[:, :-2].values
@@ -50,6 +50,7 @@ xMin = xMin - 0.03 * (xMax - xMin)
 xMax = xMax + 0.03 * (xMax - xMin)
 totalAugmentedX = 822
 # 6% Extrapolated (62 points), 94% Interpolated (966 points). 1028 points total
+# Scaling Data
 xAugmented = np.random.uniform(xMin, xMax, size=(totalAugmentedX, x.shape[1]))
 xAugmentedLog = np.log1p(xAugmented)
 xAugmentedScaled = dataScaler.transform(xAugmentedLog)
@@ -60,7 +61,7 @@ yColumn = np.array(yAugmented)
 dfCSV = pd.DataFrame(np.column_stack((xColumns, yColumn)))
 dfCSV.to_csv(f"{directory}/{model} Size_{setSize} Random_{randomState} Augmented Data.csv", index= False, header=False)
 
-print(f"Saved {model} Size_{setSize} Random_{randomState} Augmented Data! randomState: {randomState}")
+print(f"Saved {model} Size_{setSize} Random_{randomState} Augmented Data!")
 
 
 

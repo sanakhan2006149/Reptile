@@ -21,9 +21,10 @@ model = "BRR"
 datasetModels  = "Dataset 1 Models" if "Dataset 1" in data else "Dataset 2 Models"
 output = "Film Thickness" if yIndex == -2 else "NTi"
 
-directory = f"Saved Models/{datasetModels}/{output}/{model}"
+directory = f"Regression Model Data and Metrics/{datasetModels}/{output}/{model}"
 os.makedirs(directory, exist_ok=True)
-with open(f"Saved Models/{datasetModels}/{output}/{model}/{model} Random_{randomState} Metric Iteration Evaluation.txt", "w") as f:
+with open(
+        f"Regression Model Data and Metrics/{datasetModels}/{output}/{model}/{model} Random_{randomState} Metric Iteration Evaluation.txt", "w") as f:
     # Write headers
     f.write("MSE, RMSE, MAPE, EV, and R^2 Metrics\n")
     f.write(f"Current Model Dataset: {data}\n")
@@ -70,7 +71,7 @@ with open(f"Saved Models/{datasetModels}/{output}/{model}/{model} Random_{random
         print(f"Completed {setSize}!")
 
         # Saving trained model
-        # directory = f"Saved Models/Starter Models/{datasetModels}/{output}/{model}/"
+        # directory = f"Regression Model Data and Metrics/Starter Models/{datasetModels}/{output}/{model}/"
         # modelName = f"{model.lower()}_model_{setSize}.pkl"
         # os.makedirs(directory, exist_ok=True)
         # joblib.dump(brr, os.path.join(directory, modelName))

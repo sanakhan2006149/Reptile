@@ -19,7 +19,7 @@ model = "BRR"
 datasetModels  = "Dataset 1 Models" if "Dataset 1" in data else "Dataset 2 Models"
 output = "Film Thickness" if yIndex == -2 else "NTi"
 
-directory = f"Saved Models/{datasetModels}/{output}/{model}"
+directory = f"Regression Model Data and Metrics/{datasetModels}/{output}/{model}"
 os.makedirs(directory, exist_ok=True)
 df = pd.read_csv(data)
 x = df.iloc[:, :-2].values
