@@ -83,6 +83,6 @@ plt.legend()
 plt.show()
 
 # Saving trained model
-# os.makedirs("Saved Models", exist_ok=True)
-# joblib.dump(svr, "Saved Models/Starter Models/svr_model.pkl")
+# os.makedirs("Regression Model Data and Metrics", exist_ok=True)
+# joblib.dump(svr, "Regression Model Data and Metrics/Starter Models/svr_model.pkl")
 # print("Saved!")
